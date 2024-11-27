@@ -1,0 +1,236 @@
+.h1 {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 3rem;
+  font-weight: 300;
+  color: #000000;
+  text-align: left;
+  padding-left: 2%;
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 1rem;
+  padding-top: 3%;
+}
+
+.logoutButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background: black;
+  color: white;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 15px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 10px 20px rgba(255, 62, 62, 0.5);
+}
+
+.logoutButton .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  background: url("https://img.icons8.com/ios-filled/50/ffffff/logout-rounded-left.png")
+    no-repeat center center / contain;
+  transition: transform 0.4s ease;
+}
+
+.logoutButton::before,
+.logoutButton::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent);
+  transition: all 0.6s ease;
+  border-radius: 50%;
+  z-index: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.logoutButton:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.logoutButton:hover .icon {
+  transform: translateX(-10px) rotate(-360deg);
+}
+
+.logoutButton:hover .text {
+  transform: translateX(10px);
+}
+
+.logoutButton:hover {
+  background: #ff1e1e;
+  transform: scale(1.08);
+}
+
+.page {
+  background-image: linear-gradient(
+    140deg,
+    #eadedb 0%,
+    #bc70a4 50%,
+    #bfd641 75%
+  );
+  width: auto;
+}
+
+.text {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #000000;
+  text-align: left;
+  padding-top: 3%;
+  padding-left: 2%;
+}
+
+/* Ensure SVG elements are responsive */
+.progress {
+  width: 100%; /* Container width should be 100% of its parent */
+  background-color: #f8f9fa; /* Optional: background color for better visibility */
+  border: 1px solid #ced4da; /* Optional: border for visibility */
+  padding: 0; /* Remove any padding */
+  margin: 0; /* Remove any margin */
+}
+
+.infocontainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  padding: 50px 0;
+}
+
+.infoitem {
+  -ms-flex-preferred-size: calc(33.33333% - 30px);
+  flex-basis: calc(33.33333% - 30px);
+
+  margin: 0 15px 30px;
+  overflow: hidden;
+  border-radius: 25px;
+}
+
+.item_link {
+  display: block;
+  padding: 30px 20px;
+  background-color: #121212;
+
+  overflow: hidden;
+
+  position: relative;
+}
+.item_link:hover,
+.item_link:hover .item_text {
+  text-decoration: none;
+  color: #fff;
+}
+.item_link:hover .item_bg {
+  -webkit-transform: scale(10);
+  -ms-transform: scale(10);
+  transform: scale(10);
+}
+.item_title {
+  min-height: 50px;
+  font-weight: bold;
+  font-size: 25px;
+  color: #fff;
+
+  z-index: 2;
+  position: relative;
+}
+
+.item_bg {
+  height: 128px;
+  width: 128px;
+  background-color: #f9b234;
+
+  z-index: 1;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+
+  border-radius: 50%;
+
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.infoitem:nth-child(2n) .item_bg {
+  background-color: #3ecd5e;
+}
+.infoitem:nth-child(3n) .item_bg {
+  background-color: #e44002;
+}
+.infoitem:nth-child(4n) .item_bg {
+  background-color: #952aff;
+}
+.infoitem:nth-child(5n) .item_bg {
+  background-color: #cd3e94;
+}
+.infoitem:nth-child(6n) .item_bg {
+  background-color: #4c49ea;
+}
+
+
+.item_text {
+  font-weight: bold;
+  color: #f9b234;
+  -webkit-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
+  transition: color 0.5s ease;
+  font-family: "IBM Plex Mono", monospace;
+  text-transform: capitalize;
+}
+
+.item_box {
+  font-size: 15px;
+  color: #fff;
+
+  z-index:1;
+  position: relative;
+}
+
+.label {
+  font-size:10px;
+  fill: #fff;
+}
+
+.infocontainer3 {
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  margin: 0 20px;
+}
+
+.infoitem:nth-child(5) {
+  width: 80%;
+}
+
+.infoitem:nth-child(6) {
+  width: 80%;
+}
+
+.item_box2 {
+  justify-content: center;
+  height: 300px;
+  z-index: 1;
+  position: relative;
+}
