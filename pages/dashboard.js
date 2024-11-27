@@ -121,7 +121,7 @@ const createRadarChart = (data, labels, selector) => {
   const height = container.clientHeight;
   const padding = 60;
   const radius = 100;
-  const levels = 5; 
+  const levels = 5;
 
   svg.attr("width", width).attr("height", height);
   svg.selectAll("*").remove(); // Clear any existing content
@@ -136,7 +136,7 @@ const createRadarChart = (data, labels, selector) => {
 
   // Draw the background circles
   for (let i = 0; i < levels; i++) {
-    const levelFactor = radius * ((i+1) / levels);
+    const levelFactor = radius * ((i + 1) / levels);
     g.selectAll(".levels")
       .data(data)
       .enter()
@@ -178,7 +178,6 @@ const createRadarChart = (data, labels, selector) => {
     .attr("text-anchor", "middle")
     .style("fill", "white")
     .style("font-size", "10px");
-  
 
   const rScale = d3
     .scaleLinear()
@@ -306,7 +305,7 @@ async function updateProgressBars(auditInfo) {
     "audit-ratio-text"
   ).textContent = `${auditRatioFormatted}`;
 }
- 
+
 //Fetch data with given query
 async function fetchData(query, token) {
   const response = await fetch(url, {
@@ -333,7 +332,6 @@ const formatSkillName = (skill) => {
     .replace(/-/g, " ")
     .replace(/\b\w/g, (char) => char.toUpperCase());
 };
-
 
 export default function Dashboard() {
   const [userIdData, setUserIdData] = useState(null);
@@ -379,8 +377,6 @@ export default function Dashboard() {
       fetchUserId();
     }
   }, []);
-
-
 
   const userInfo = userData?.data?.user[0];
   const xpInfo = xpData?.data.transaction_aggregate.aggregate.sum.amount;
@@ -486,28 +482,36 @@ export default function Dashboard() {
   const handleLogout = async () => {
     try {
       // Call the expire endpoint
-      await fetch('https://learn.reboot01.com/api/auth/expire', {
-        method: 'GET',
+      await fetch("https://learn.reboot01.com/api/auth/expire", {
+        method: "GET",
         headers: {
-          'Authorization': `Bearer ${Cookies.get('jwt')}`
-        }
+          Authorization: `Bearer ${Cookies.get("jwt")}`,
+        },
       });
+
+      if (!response.ok) {
+        throw new Error(`Expire endpoint failed: ${response.statusText}`);
+      }
 
       // Call the signout endpoint
-      await fetch('https://learn.reboot01.com/api/auth/signout', {
-        method: 'POST',
+      await fetch("https://learn.reboot01.com/api/auth/signout", {
+        method: "POST",
         headers: {
-          'Authorization': `Bearer ${Cookies.get('jwt')}`
-        }
+          Authorization: `Bearer ${Cookies.get("jwt")}`,
+        },
       });
 
+      if (!response.ok) {
+        throw new Error(`Signout endpoint failed: ${response.statusText}`);
+      }
+
       // Clear the JWT cookie
-      Cookies.remove('jwt');
+      Cookies.remove("jwt");
 
       // Redirect to the login page
       router.push("/");
     } catch (error) {
-      console.error('Error during logout:', error);
+      console.error("Error during logout:", error);
     }
   };
 
@@ -528,7 +532,7 @@ export default function Dashboard() {
             </div>
           </>
         ) : (
-            <h1 className={styles.h1}>Loading...</h1>
+          <h1 className={styles.h1}>Loading...</h1>
         )}
       </div>
 
@@ -584,58 +588,57 @@ export default function Dashboard() {
             )}
           </a>
         </div>
-      </div> 
+      </div>
 
-        <div className={styles.infoitem}>
-          <a href="#" className={styles.item_link}>
-            <div className={styles.item_bg}> </div>
-            <div className={styles.item_title}>Last activity</div>
-            {lastProjects ? (
-              <>
-                <div className={styles.item_box}>
-                  <div className={styles.item_text}>
-                    {lastProjects.map((project, index) => (
-                      <div key={index}>
-                        {project.name} — ({project.type})
-                      </div>
-                    ))}
-                  </div>
+      <div className={styles.infoitem}>
+        <a href="#" className={styles.item_link}>
+          <div className={styles.item_bg}> </div>
+          <div className={styles.item_title}>Last activity</div>
+          {lastProjects ? (
+            <>
+              <div className={styles.item_box}>
+                <div className={styles.item_text}>
+                  {lastProjects.map((project, index) => (
+                    <div key={index}>
+                      {project.name} — ({project.type})
+                    </div>
+                  ))}
                 </div>
-              </>
-            ) : (
-              <h1 className={styles.h1}>Loading...</h1>
-            )}
-          </a>
-        </div>
-        <div className={styles.infoitem}>
-          <a href="#" className={styles.item_link}>
-            <div className={styles.item_bg}> </div>
-            <div className={styles.item_title}>Audit information</div>
-            {auditInfo ? (
-              <>
-                <div className={styles.item_box}>
-                  <div className={styles.item_text}>
-                    <p>
-                      Audit Ratio: <span id="audit-ratio-text"></span>
-                    </p>
-                    <p>
-                      Total Audits Done:{" "}
-                      <span id="total-audits-done-text"></span>
-                    </p>
-                    <svg id="total-audits-done-progress"></svg>
-                    <p>
-                      Total Audits Received:{" "}
-                      <span id="total-audits-received-text"></span>
-                    </p>
-                    <svg id="total-audits-received-progress"></svg>
-                  </div>
+              </div>
+            </>
+          ) : (
+            <h1 className={styles.h1}>Loading...</h1>
+          )}
+        </a>
+      </div>
+      <div className={styles.infoitem}>
+        <a href="#" className={styles.item_link}>
+          <div className={styles.item_bg}> </div>
+          <div className={styles.item_title}>Audit information</div>
+          {auditInfo ? (
+            <>
+              <div className={styles.item_box}>
+                <div className={styles.item_text}>
+                  <p>
+                    Audit Ratio: <span id="audit-ratio-text"></span>
+                  </p>
+                  <p>
+                    Total Audits Done: <span id="total-audits-done-text"></span>
+                  </p>
+                  <svg id="total-audits-done-progress"></svg>
+                  <p>
+                    Total Audits Received:{" "}
+                    <span id="total-audits-received-text"></span>
+                  </p>
+                  <svg id="total-audits-received-progress"></svg>
                 </div>
-              </>
-            ) : (
-              <h1 className={styles.h1}>Loading...</h1>
-            )}
-          </a>
-        </div>
+              </div>
+            </>
+          ) : (
+            <h1 className={styles.h1}>Loading...</h1>
+          )}
+        </a>
+      </div>
 
       <div className={styles.infocontainer3}>
         <div className={styles.infoitem}>
@@ -645,8 +648,8 @@ export default function Dashboard() {
             {skillsData ? (
               <>
                 <div className={styles.item_box2}>
-                    <svg id="technical-skills-chart"></svg>
-                  </div>
+                  <svg id="technical-skills-chart"></svg>
+                </div>
               </>
             ) : (
               <h1 className={styles.h1}>Loading...</h1>
@@ -660,8 +663,8 @@ export default function Dashboard() {
             {skillsData ? (
               <>
                 <div className={styles.item_box2}>
-                    <svg id="technologies-chart"></svg>
-                  </div>
+                  <svg id="technologies-chart"></svg>
+                </div>
               </>
             ) : (
               <h1 className={styles.h1}>Loading...</h1>
