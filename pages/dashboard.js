@@ -407,7 +407,6 @@ export default function Dashboard() {
   useEffect(() => {
     if (skillsData) {
       const skills = skillsData.data.user[0].transactions || [];
-      console.log(skills);
       const technicalSkills = {};
       const technologies = {};
 
@@ -451,8 +450,6 @@ export default function Dashboard() {
       const technicalSkillsData = Object.values(technicalSkills);
       const technologiesLabels = Object.keys(technologies).map(formatSkillName);
       const technologiesData = Object.values(technologies);
-      console.log(technicalSkillsLabels);
-      console.log(technologiesLabels);
 
       createRadarChart(
         technicalSkillsData,
