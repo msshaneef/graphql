@@ -483,13 +483,33 @@ export default function Dashboard() {
     }
   }, [auditInfo]);
 
-  const handleLogout = () => {
-  //Clear all cookies
-  Cookies.remove("jwt");
+  const handleLogout = async () => {
+    try {
+      // Call the expire endpoint
+      await fetch('https://learn.reboot01.com/api/auth/expire', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${Cookies.get('jwt')}`
+        }
+      });
 
-  //Redirect to login page
-  router.push("/");
-};
+      // Call the signout endpoint
+      await fetch('https://learn.reboot01.com/api/auth/signout', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${Cookies.get('jwt')}`
+        }
+      });
+
+      // Clear the JWT cookie
+      Cookies.remove('jwt');
+
+      // Redirect to the login page
+      router.push("/");
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
 
   return (
     <div className={styles.page}>
