@@ -489,9 +489,6 @@ export default function Dashboard() {
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`Expire endpoint failed: ${response.statusText}`);
-      }
 
       // Call the signout endpoint
       await fetch("https://learn.reboot01.com/api/auth/signout", {
@@ -500,10 +497,6 @@ export default function Dashboard() {
           Authorization: `Bearer ${Cookies.get("jwt")}`,
         },
       });
-
-      if (!response.ok) {
-        throw new Error(`Signout endpoint failed: ${response.statusText}`);
-      }
 
       // Clear the JWT cookie
       Cookies.remove("jwt");
