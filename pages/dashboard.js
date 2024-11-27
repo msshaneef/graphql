@@ -13,7 +13,7 @@ import {
   lastProjectsQuery,
   skillsQuery,
   auditQuery,
-} from "../pages/queries.js";
+} from "../components/queries.js";
 
 import {
   createRadarChart,
@@ -21,7 +21,7 @@ import {
   updateProgressBars,
   fetchData,
   formatSkillName,
-} from "../pages/utility.js";
+} from "../components/utility.js";
 
 // Main Component
 export default function Dashboard() {
