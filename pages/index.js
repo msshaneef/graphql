@@ -22,7 +22,7 @@ export default function Home() {
       body: JSON.stringify({}),
     })
     .then(response => response.json())
-    .then(data => {console.log(data)
+    .then(data => {
       const jwt = data;
 
       // Check if the JWT is valid
